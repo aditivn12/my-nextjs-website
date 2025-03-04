@@ -19,7 +19,7 @@ export default function About() {
             Academic Journey
           </h2>
           <p className="text-gray-600 mt-2">
-            I love the intersection between technology and business and would like to eventually get into tech consulting. But before that I...
+            I love the intersection between technology and business and would like to eventually get into tech consulting. 
           </p>
         </div>
 
