@@ -47,9 +47,29 @@ const config = {
       borderRadius: {
         '5xl': '40px',
       },
+      animation: {
+        'spin-slow': 'spin 2.5s linear infinite',
+        'fade-in': 'fadeIn 1s ease-out forwards',
+        'fade-out': 'fadeOut 1s ease-in forwards',
+        'blink': 'blink 1s step-start infinite',
+      },
+      keyframes: {
+        fadeIn: {
+          '0%': { opacity: '0' },
+          '100%': { opacity: '1' },
+        },
+        fadeOut: {
+          '0%': { opacity: '1' },
+          '100%': { opacity: '0' },
+        },
+        blink: {
+          '0%, 100%': { opacity: '0' },
+          '50%': { opacity: '1' },
+        },
+      },
     },
   },
   plugins: [],
 };
 
-export default config; // ✅ Convert to ESM syntax
+export default config;
