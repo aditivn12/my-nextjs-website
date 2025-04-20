@@ -12,9 +12,13 @@ const Navbar = () => {
         <Link href="/about" className="text-lg font-semibold">
           About Me
         </Link>
+        <Link href="/projects" className="text-lg font-semibold">
+          Projects & Internships
+        </Link>
         <Link href="/connect" className="text-lg font-semibold">
           Connect With Me
         </Link>
+
       </div>
 
       <div className="flex gap-4">
