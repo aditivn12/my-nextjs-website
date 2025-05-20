@@ -12,13 +12,39 @@ export default function Connect() {
 
   return (
     <div
-      className={`min-h-screen bg-gradient-to-br from-[#fdf1ef] via-[#fde9dc] to-[#fdf6d5] text-zinc-800 flex flex-col items-center justify-center p-10 transition-all duration-1000 ${
+      className={`min-h-screen bg-gradient-to-br from-[#ffe4d9] via-[#ffccf9] to-[#d5f4ff] text-zinc-800 flex flex-col items-center p-10 transition-all duration-1000 ${
         visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
       }`}
     >
-      <h1 className="text-4xl md:text-5xl font-bold mb-10 text-center text-rose-600">Let&apos;s Connect</h1>
+
+      <div className="w-full flex flex-wrap justify-center gap-4 md:gap-6 pt-6 pb-12">
+        <Link
+          href="/"
+          className="text-sm md:text-md font-medium text-[#2A6DA9] bg-white px-4 py-2 rounded-xl border border-[#c9e9fa] hover:bg-[#d5f4ff] transition hover:scale-105 shadow-sm"
+        >
+          Home
+        </Link>
+        <Link
+          href="/about"
+          className="text-sm md:text-md font-medium text-[#a64d79] bg-white px-4 py-2 rounded-xl border border-[#f8cfe3] hover:bg-[#ffccf9] transition hover:scale-105 shadow-sm"
+        >
+          About Me
+        </Link>
+        <Link
+          href="/projects"
+          className="text-sm md:text-md font-medium text-[#cc6b47] bg-white px-4 py-2 rounded-xl border border-[#fbd2c4] hover:bg-[#ffe4d9] transition hover:scale-105 shadow-sm"
+        >
+          Projects & Internships
+        </Link>
+      </div>
+
+      {/* 💌 Main Section */}
+      <h1 className="text-4xl md:text-5xl font-bold mb-10 text-center text-rose-600">
+        Let&apos;s Connect
+      </h1>
 
       <div className="flex flex-col items-center gap-10 w-full max-w-4xl">
+        {/* 📍 Map */}
         <div className="w-full md:w-3/4 rounded-3xl overflow-hidden shadow-lg border border-rose-100">
           <iframe
             title="Chapel Hill Location"
@@ -29,12 +55,13 @@ export default function Connect() {
           ></iframe>
         </div>
 
+        {/* ✉️ Contact Buttons */}
         <div className="w-full flex flex-col items-center">
           <h2 className="text-2xl font-semibold mb-6 text-rose-600">Get in Touch</h2>
           <div className="grid grid-cols-2 gap-4 md:gap-6">
             <Link
               href="mailto:msgaditi@gmail.com"
-              className="bg-white text-rose-700 flex items-center justify-center p-3 rounded-xl font-medium hover:bg-rose-50 transition w-40 border border-rose-200 shadow-md hover:scale-105"
+              className="bg-white text-[#e06b6b] flex items-center justify-center p-3 rounded-xl font-medium hover:bg-[#ffecec] transition w-40 border border-[#f4b6b6] shadow-md hover:scale-105"
             >
               📧 Email
             </Link>
@@ -42,7 +69,7 @@ export default function Connect() {
             <Link
               href="https://www.linkedin.com/in/aditi-nayak1/"
               target="_blank"
-              className="bg-white text-sky-700 flex items-center justify-center p-3 rounded-xl font-medium hover:bg-sky-50 transition w-40 border border-sky-200 shadow-md hover:scale-105"
+              className="bg-white text-[#4a8bb2] flex items-center justify-center p-3 rounded-xl font-medium hover:bg-[#eaf6ff] transition w-40 border border-[#b9e3f6] shadow-md hover:scale-105"
             >
               🔗 LinkedIn
             </Link>
@@ -51,7 +78,7 @@ export default function Connect() {
               <Link
                 href="https://github.com/aditivn12"
                 target="_blank"
-                className="bg-white text-purple-700 flex items-center justify-center p-3 rounded-xl font-medium hover:bg-purple-50 transition w-40 border border-purple-200 shadow-md hover:scale-105"
+                className="bg-white text-[#9370DB] flex items-center justify-center p-3 rounded-xl font-medium hover:bg-[#f2edff] transition w-40 border border-[#d3c3f3] shadow-md hover:scale-105"
               >
                 🐙 GitHub
               </Link>

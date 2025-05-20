@@ -28,7 +28,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <Navbar />
+        {/* <Navbar /> */} {/* 👈 This line is now commented out */}
         <main className="relative overflow-hidden">
           {children}
         </main>
@@ -36,6 +36,7 @@ export default function RootLayout({
     </html>
   );
 }
+
 
 
 
