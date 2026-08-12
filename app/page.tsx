@@ -1,92 +1,171 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import Link from "next/link";
+import { useEffect, useState } from "react";
 
 export default function Home() {
-  const fullText = "Welcome to Aditi Nayak's Website";
-  const [typedText, setTypedText] = useState("");
-  const [showCursor, setShowCursor] = useState(true);
-  const [showSplash, setShowSplash] = useState(true);
-  const [fadeSplash, setFadeSplash] = useState(false);
+  const [loading, setLoading] = useState(true);
+  const [scramble, setScramble] = useState("X7.");
+  const [visible, setVisible] = useState(false);
 
   useEffect(() => {
-    const fadeOut = setTimeout(() => setFadeSplash(true), 2000);
-    const hideSplash = setTimeout(() => setShowSplash(false), 3000);
+    const characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+    let count = 0;
+
+    const scrambleInterval = setInterval(() => {
+      let firstCharacter;
+      let secondCharacter;
+
+      // Randomize first character, then lock into A
+      if (count >= 8) {
+        firstCharacter = "A";
+      } else {
+        firstCharacter =
+          characters[Math.floor(Math.random() * characters.length)];
+      }
+
+      // Randomize second character, then lock into N
+      if (count >= 12) {
+        secondCharacter = "N";
+      } else {
+        secondCharacter =
+          characters[Math.floor(Math.random() * characters.length)];
+      }
+
+      setScramble(`${firstCharacter}${secondCharacter}.`);
+
+      count++;
+
+      // Finish animation
+      if (count >= 15) {
+        clearInterval(scrambleInterval);
+
+        // Final logo
+        setScramble("AN.");
+
+        // Hold AN. on screen
+        setTimeout(() => {
+          setLoading(false);
+
+          // Small delay before fading homepage in
+          setTimeout(() => {
+            setVisible(true);
+          }, 100);
+        }, 700);
+      }
+    }, 130);
+
     return () => {
-      clearTimeout(fadeOut);
-      clearTimeout(hideSplash);
+      clearInterval(scrambleInterval);
     };
   }, []);
 
-  useEffect(() => {
-    if (!showSplash) {
-      let i = 0;
-      setTypedText("");
-      const interval = setInterval(() => {
-        if (i <= fullText.length) {
-          setTypedText(fullText.slice(0, i));
-          i++;
-        } else {
-          clearInterval(interval);
-          setTimeout(() => setShowCursor(false), 1000);
-        }
-      }, 75);
-      return () => clearInterval(interval);
-    }
-  }, [showSplash]);
+  /* ========================================
+     SCRAMBLE INTRO
+  ======================================== */
 
-  if (showSplash) {
+  if (loading) {
     return (
-      <div
-        className={`min-h-screen flex items-center justify-center bg-gradient-to-br from-[#ffe4d9] via-[#ffccf9] to-[#d5f4ff] transition-opacity duration-1000 ${
-          fadeSplash ? "opacity-0" : "opacity-100"
-        }`}
-      >
-        <div className="text-8xl font-extrabold text-[#2A6DA9] animate-spin-slow">
-          A
+      <main className="flex min-h-screen items-center justify-center bg-[#151515] text-[#f2f2ee]">
+        <div className="flex flex-col items-center">
+
+          {/* SCRAMBLING LOGO */}
+          <p className="text-[clamp(5rem,12vw,11rem)] font-medium leading-none tracking-[-0.08em]">
+            {scramble}
+          </p>
+
+          {/* ANIMATED LINE */}
+          <div className="mt-8 h-px w-32 overflow-hidden bg-white/10">
+            <div className="h-full w-full animate-[loader_1.5s_ease-in-out_infinite] bg-white/60" />
+          </div>
+
         </div>
-      </div>
+      </main>
     );
   }
 
+  /* ========================================
+     HOMEPAGE
+  ======================================== */
+
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#ffe4d9] via-[#ffccf9] to-[#d5f4ff] text-gray-800 flex flex-col items-center px-6 text-center">
-      <div className="w-full flex flex-wrap justify-center gap-4 md:gap-6 pt-6">
-        <Link
-          href="/about"
-          className="text-sm md:text-md font-medium text-[#2A6DA9] bg-white px-4 py-2 rounded-xl border border-[#c9e9fa] hover:bg-[#d5f4ff] transition hover:scale-105 shadow-sm"
-        >
-          About Me
-        </Link>
-        <Link
-          href="/projects"
-          className="text-sm md:text-md font-medium text-[#cc6b47] bg-white px-4 py-2 rounded-xl border border-[#fbd2c4] hover:bg-[#ffe4d9] transition hover:scale-105 shadow-sm"
-        >
-          Projects & Internships
-        </Link>
-        <Link
-          href="/connect"
-          className="text-sm md:text-md font-medium text-[#6d5cae] bg-white px-4 py-2 rounded-xl border border-[#e3ddfa] hover:bg-[#f2edff] transition hover:scale-105 shadow-sm"
-        >
-          Connect With Me
-        </Link>
-      </div>
+    <main
+      className={`min-h-screen bg-[#151515] text-[#f2f2ee] transition-all duration-1000 ${
+        visible
+          ? "translate-y-0 opacity-100"
+          : "translate-y-3 opacity-0"
+      }`}
+    >
 
-      <div className="flex flex-col items-center justify-center flex-grow text-center mt-24">
-        <h1 className="text-4xl md:text-5xl font-bold leading-tight tracking-tight text-[#2A6DA9] drop-shadow-sm">
-          {typedText}
-          {showCursor && (
-            <span className="inline-block w-[1ch] animate-blink text-[#2A6DA9]">
-              |
+      {/* ========================================
+          NAVIGATION
+      ======================================== */}
+
+      <header className="flex items-center justify-between border-b border-white/10 px-6 py-6 md:px-12 lg:px-16">
+
+        {/* LOGO */}
+        <Link
+          href="/"
+          className="text-lg font-semibold tracking-[-0.04em] transition-opacity hover:opacity-60"
+        >
+          AN.
+        </Link>
+
+        {/* NAVIGATION LINKS */}
+        <nav className="flex gap-5 md:gap-8">
+
+          <Link
+            href="/about"
+            className="text-[11px] uppercase tracking-[0.18em] text-white/50 transition hover:text-white"
+          >
+            About
+          </Link>
+
+          <Link
+            href="/projects"
+            className="text-[11px] uppercase tracking-[0.18em] text-white/50 transition hover:text-white"
+          >
+            Work
+          </Link>
+
+          <Link
+            href="/connect"
+            className="text-[11px] uppercase tracking-[0.18em] text-white/50 transition hover:text-white"
+          >
+            Contact
+          </Link>
+
+        </nav>
+
+      </header>
+
+      {/* ========================================
+          HERO
+      ======================================== */}
+
+      <section className="grid min-h-[calc(100vh-77px)] grid-cols-1 px-6 py-16 md:px-12 lg:grid-cols-[140px_1fr] lg:px-16 lg:py-24">
+
+        {/* LEFT LABEL */}
+        <div className="mb-10 flex gap-3 text-[10px] uppercase tracking-[0.2em] text-white/35 lg:mb-0 lg:flex-col">
+          <span>00</span>
+          <span>Home</span>
+        </div>
+
+        {/* MAIN TEXT */}
+        <div>
+          <h1 className="max-w-6xl text-[clamp(3.5rem,8vw,8.5rem)] font-medium leading-[0.88] tracking-[-0.065em]">
+
+            Hi, I&apos;m Aditi.
+
+            <span className="block text-white/25">
+              I like building things that make complex ideas feel simple.
             </span>
-          )}
-        </h1>
 
-        <p className="text-gray-700 mt-6 max-w-xl text-lg font-light">
-          Computer Science student at UNC Chapel Hill with minors in Data Science and Risk Management — passionate about using technology and data-driven strategy to support consulting efforts in the environmental and healthcare sectors, where innovation can directly improve lives and systems.
-        </p>
-      </div>
-    </div>
+          </h1>
+        </div>
+
+      </section>
+
+    </main>
   );
 }
