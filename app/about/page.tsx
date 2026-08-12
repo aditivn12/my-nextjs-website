@@ -180,13 +180,13 @@ export default function About() {
 
                   <div>
                     <p className="text-5xl font-medium tracking-[-0.06em] md:text-6xl">
-                      8192
+                      3 
                     </p>
 
                     <p className="mt-3 text-sm leading-6 text-white/35">
-                      highest tile
+                      continents 
                       <br />
-                      in 2048
+                        lived
                     </p>
                   </div>
 
